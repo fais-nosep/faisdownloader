@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAIS DOWNLOADER</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--card-bg:#FFF8F0;
+--accent-yellow:#FFD600;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:'Work Sans',sans-serif;
+background-color:var(--card-bg);
+background-image: radial-gradient(#000 5%, transparent 6%);
+background-size:30px 30px;
+overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+background:var(--accent-yellow);
+padding:15px;
+border-bottom:2px solid black;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo-box{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.top-avatar{
+width:45px;
+height:45px;
+border-radius:50%;
+border:2px solid black;
+object-fit:cover;
+}
+
+.menu-btn{
+font-size:28px;
+cursor:pointer;
+}
+
+/* MENU */
+
+.menu{
+position:absolute;
+right:15px;
+top:65px;
+background:white;
+border:2px solid black;
+border-radius:10px;
+box-shadow:3px 3px 0 black;
+display:none;
+flex-direction:column;
+z-index:99;
+}
+
+.menu a{
+padding:12px 20px;
+text-decoration:none;
+color:black;
+border-bottom:1px solid #ddd;
+font-family:'Space Mono';
+}
+
+.menu a:hover{
+background:#FFD600;
+}
+
+.menu a:last-child{
+border-bottom:none;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:600px;
+margin:auto;
+padding:20px;
+}
+
+/* CARD */
+
+.card{
+background:white;
+border:2px solid black;
+border-radius:16px;
+padding:20px;
+box-shadow:4px 4px 0 black;
+margin-bottom:20px;
+}
+
+/* INPUT */
+
+input{
+width:100%;
+padding:12px;
+border:2px solid black;
+border-radius:10px;
+margin-bottom:10px;
+font-family:'Space Mono';
+}
+
+/* BUTTON */
+
+button{
+width:100%;
+padding:12px;
+background:var(--accent-yellow);
+border:2px solid black;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:3px 3px 0 black;
+font-family:'Space Mono';
+}
+
+/* VIDEO */
+
+video{
+width:100%;
+border-radius:10px;
+border:2px solid black;
+margin-top:10px;
+}
+
+.video-title{
+margin-top:10px;
+font-family:'Space Mono';
+}
+
+/* PROFILE */
+
+.profile-center{
+text-align:center;
+}
+
+.avatar-box{
+position:relative;
+width:130px;
+margin:auto;
+}
+
+.avatar{
+width:130px;
+height:130px;
+border-radius:50%;
+border:3px solid black;
+object-fit:cover;
+}
+
+.camera-icon{
+position:absolute;
+bottom:5px;
+right:5px;
+background:#FFD600;
+border:2px solid black;
+width:38px;
+height:38px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+/* HISTORY */
+
+.history-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px;
+border-bottom:1px solid #ccc;
+font-family:'Space Mono';
+}
+
+.delete-btn{
+background:#FF5A5F;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* NAVBAR */
+
+.navbar{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+max-width:400px;
+height:65px;
+background:white;
+border:2px solid black;
+border-radius:40px;
+display:flex;
+justify-content:space-around;
+align-items:center;
+box-shadow:5px 5px 0 black;
+}
+
+.nav-item{
+font-weight:bold;
+cursor:pointer;
+opacity:.5;
+font-family:'Space Mono';
+}
+
+.nav-item.active{
+opacity:1;
+background:var(--accent-yellow);
+padding:8px 15px;
+border-radius:20px;
+border:2px solid black;
+}
+
+.hidden{
+display:none;
+}
+
+.loader{
+text-align:center;
+font-family:'Space Mono';
+padding:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo-box">
+
+<img id="topAvatar" class="top-avatar" src="https://i.imgur.com/CKjQqKV.jpeg">
+
+<b>FaisDownloader</b>
+
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<div class="menu" id="menu">
+
+<a href="https://whatsapp.com/channel/0029VbBjL37KLaHefHhMiK2F" target="_blank">Saluran WhatsApp</a>
+
+<a href="https://www.tiktok.com/@dobleng_jibrud?_r=1&_t=ZS-94QaSDEQ3VA" target="_blank">TikTok</a>
+
+<a href="https://www.instagram.com/faisdobleng?igsh=MXJmbDc4eWhsZjBwMg==" target="_blank">Instagram</a>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<!-- HOME -->
+
+<div id="home">
+
+<div class="card">
+
+<input id="link" placeholder="Paste Link TikTok / YouTube">
+
+<button onclick="downloadVideo()">DOWNLOAD</button>
+
+<div id="result"></div>
+
+</div>
+
+</div>
+
+<!-- HISTORY -->
+
+<div id="history" class="hidden">
+
+<div class="card">
+
+<h3>History Download</h3>
+
+<div id="historyList"></div>
+
+</div>
+
+</div>
+
+<!-- PROFILE -->
+
+<div id="profile" class="hidden">
+
+<div class="card profile-center">
+
+<div class="avatar-box">
+
+<img id="avatar" class="avatar" src="https://i.imgur.com/CKjQqKV.jpeg">
+
+<label for="uploadAvatar" class="camera-icon">📷</label>
+
+<input type="file" id="uploadAvatar" hidden>
+
+</div>
+
+<input id="nameInput" placeholder="faisdobleng">
+
+<input id="emailInput" placeholder="faisproject@gmail.com">
+
+<input id="phoneInput" placeholder="0838 kapan.kapan">
+
+<input id="locationInput" placeholder="Gandaria-Tangerang">
+
+<button onclick="saveProfile()">Simpan</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div class="nav-item active" onclick="showPage('home',this)">Home</div>
+
+<div class="nav-item" onclick="showPage('history',this)">History</div>
+
+<div class="nav-item" onclick="showPage('profile',this)">Setting</div>
+
+</div>
+
+<script>
+
+/* MENU */
+
+function toggleMenu(){
+
+let menu=document.getElementById("menu")
+
+menu.style.display=menu.style.display==="flex"?"none":"flex"
+
+}
+
+/* NAVIGATION */
+
+function showPage(page,el){
+
+document.getElementById("home").classList.add("hidden")
+document.getElementById("history").classList.add("hidden")
+document.getElementById("profile").classList.add("hidden")
+
+document.getElementById(page).classList.remove("hidden")
+
+document.querySelectorAll(".nav-item").forEach(i=>i.classList.remove("active"))
+el.classList.add("active")
+
+}
+
+/* DOWNLOAD */
+
+async function downloadVideo(){
+
+let url=document.getElementById("link").value
+
+document.getElementById("result").innerHTML=`<div class="loader">Processing...</div>`
+
+let api=""
+
+if(url.includes("tiktok")){
+api="https://api.danzy.web.id/api/download/tiktok?url="+url
+}else{
+api="https://api.danzy.web.id/api/download/ytmp4?url="+url
+}
+
+try{
+
+let res=await fetch(api)
+let data=await res.json()
+
+let video=""
+let title="Video"
+
+if(url.includes("tiktok")){
+video=data.data?.links?.[0]
+title=data.data?.title || "TikTok Video"
+}else{
+video=data.result?.downloads?.video?.url
+title=data.result?.title || "YouTube Video"
+}
+
+setTimeout(()=>{
+
+document.getElementById("result").innerHTML=`
+
+<video controls src="${video}"></video>
+
+<div class="video-title">${title}</div>
+
+<a href="${video}" download>
+<button>Download Video</button>
+</a>
+
+`
+
+saveHistory(title)
+
+},3000)
+
+}catch{
+
+document.getElementById("result").innerHTML="Error mengambil video"
+
+}
+
+}
+
+/* HISTORY */
+
+function saveHistory(title){
+
+let history=JSON.parse(localStorage.getItem("history")||"[]")
+
+history.unshift({title})
+
+localStorage.setItem("history",JSON.stringify(history))
+
+renderHistory()
+
+}
+
+function deleteHistory(i){
+
+let history=JSON.parse(localStorage.getItem("history")||"[]")
+
+history.splice(i,1)
+
+localStorage.setItem("history",JSON.stringify(history))
+
+renderHistory()
+
+}
+
+function renderHistory(){
+
+let history=JSON.parse(localStorage.getItem("history")||"[]")
+
+let html=""
+
+history.forEach((i,index)=>{
+
+html+=`
+
+<div class="history-item">
+
+<span>${i.title}</span>
+
+<button class="delete-btn" onclick="deleteHistory(${index})">Hapus</button>
+
+</div>
+
+`
+
+})
+
+document.getElementById("historyList").innerHTML=html
+
+}
+
+renderHistory()
+
+/* UPLOAD AVATAR */
+
+document.getElementById("uploadAvatar").onchange=function(){
+
+let file=this.files[0]
+
+let reader=new FileReader()
+
+reader.onload=function(){
+
+document.getElementById("avatar").src=reader.result
+document.getElementById("topAvatar").src=reader.result
+
+localStorage.setItem("avatar",reader.result)
+
+}
+
+reader.readAsDataURL(file)
+
+}
+
+</script>
+
+</body>
+</html>
